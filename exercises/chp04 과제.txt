@@ -1,0 +1,63 @@
+chp04 연습 문제 (조건문)
+
+month = int(input("월 입력: "))
+day = int(input("일 입력: "))
+
+if month == 8 and day == 15:
+    result = "광복절"
+
+elif (month % 2 == 1 and day == 15) or (month % 2 == 0 and day == 16):
+    result = "그날"
+    
+else:
+    result = "평일"
+    
+print(result)
+
+
+3번 문제
+
+i = 1
+
+total = 0
+
+while i <= 50:
+
+    if i % 2 == 0 and i % 3 != 0:
+
+        total += i
+
+    i += 1
+
+print(total)
+
+결과값 : 408
+
+4번 문제 : 위의 두개 코드
+
+
+연습문제(2/2)
+
+sensors = {
+
+'dht11': {
+
+'temperature': 23,
+
+'humidity': 47,
+
+'unit': 'celsius'
+
+},
+
+'bh1750': {
+
+'illuminance': 450,
+
+'unit': 'lux'
+
+}
+
+}
+
+print(sensors)
