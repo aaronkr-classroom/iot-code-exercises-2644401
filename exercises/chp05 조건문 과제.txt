@@ -1,0 +1,70 @@
+class SayDays:
+    def __init__(self, year, month, day):
+        self.year = year
+        self.month = month
+        self.day = day
+
+    # 윤년 판별
+    def is_leap(self):
+        if (self.year % 4 == 0 and self.year % 100 != 0) or (self.year % 400 == 0):
+            return True
+        return False
+
+    # 해당 월까지 누적 일수 계산
+    def days(self):
+        mdays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        if self.is_leap():
+            mdays[1] = 29
+
+        total = 0
+
+        for i in range(self.month - 1):
+            total += mdays[i]
+
+        total += self.day
+
+        return total
+
+    # 남은 일수
+    def days_left(self):
+        total_days = 366 if self.is_leap() else 365
+        return total_days - self.days()
+
+    # Zeller 공식 (0 = 토요일)
+    def weekday(self):
+        y = self.year
+        m = self.month
+        d = self.day
+
+        if m < 3:
+            m += 12
+            y -= 1
+
+        K = y % 100
+        J = y // 100
+
+        h = (d + (13 * (m + 1)) // 5 + K + (K // 4) + (J // 4) + 5 * J) % 7
+
+        return h
+
+    # 요일 한글 변환
+    def weekday_name(self):
+        names = ["토요일", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일"]
+        return names[self.weekday()]
+
+
+# ===== 프로그램 실행 부분 =====
+
+while True:
+    y = int(input("년도 입력: "))
+    m = int(input("월 입력: "))
+    d = int(input("일 입력: "))
+
+    obj = SayDays(y, m, d)
+
+    print("올해 몇 번째 날:", obj.days())
+    print("남은 일수:", obj.days_left())
+    print("요일 숫자:", obj.weekday())
+    print("요일 이름:", obj.weekday_name())
+    print("----------------------")
